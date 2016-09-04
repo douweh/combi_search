@@ -79,4 +79,34 @@ describe "CombiSearch with setup" do
     end
   end
 
+  describe "scope" do
+
+    before(:each) {
+      CombiSearch::Entry.destroy_all
+    }
+
+    it 'returns all the search-entries for a valid scope' do
+      Movie.create(:title=>"Irrelevant")
+      Movie.create(:title=>"Also irrelevant")
+      expect(CombiSearch.scoped(:titles).all.count).to be 2
+    end
+
+    it "includes the 'searchable' model for each entry" do
+      Movie.create(:title=>"Movie Title")
+      Book.create(:title=>"Book Title")
+      search_results = CombiSearch.scoped(:titles).all
+      expect(search_results.first.searchable.title).to eq "Movie Title"
+      expect(search_results.last.searchable.title).to eq "Book Title"
+      expect(search_results.first.searchable.class).to be Movie
+      expect(search_results.last.searchable.class).to be Book
+    end
+
+    xit 'throws for an invalid scope' do
+      Movie.create(:title=>"Irrelevant")
+      Movie.create(:title=>"Also irrelevant")
+      expect(CombiSearch.scoped(:nonexistent).all.count).to be 0
+    end
+
+  end
+
 end

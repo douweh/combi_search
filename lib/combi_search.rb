@@ -50,6 +50,10 @@ module CombiSearch
     }
   end
 
+  def self.scoped(scope)
+    CombiSearch::Entry.where(:scope=>scope).includes(:searchable)
+  end
+
   module ClassMethods
 
     # Method to add a combi_search_scope for a specific model
