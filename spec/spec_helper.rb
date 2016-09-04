@@ -1,2 +1,8 @@
+require "active_record"
+
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'combi_search'
+
+ActiveRecord::Base.establish_connection(
+    adapter:  'sqlite3',
+    database: ':memory:'
+)

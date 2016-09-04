@@ -1,8 +1,8 @@
 require "active_support"
-require "active_record"
 
 require "combi_search/version"
 require "combi_search/entry"
+require "combi_search/migration"
 
 module CombiSearch
   extend ActiveSupport::Concern

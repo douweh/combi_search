@@ -1,3 +1,5 @@
+require "active_record"
+
 module CombiSearch
   class Entry < ActiveRecord::Base
     self.table_name = 'combi_search_entries'
