@@ -4,7 +4,7 @@ module CombiSearch
       t.text :content
       t.text :scope
       t.belongs_to :searchable, :polymorphic => true
-      t.timestamps
+      t.timestamps null: true
     end
   end
 

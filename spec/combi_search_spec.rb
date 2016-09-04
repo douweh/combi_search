@@ -1,7 +1,22 @@
 require 'spec_helper'
 require 'dummy_models'
 
-describe "CombiSearch" do
+describe "CombiSearch without setup" do
+  before(:all) {
+    Book.create_table
+  }
+  after(:all) {
+    Book.drop_table
+  }
+
+  it "should throw an exception when trying to save a model, when 'combi_search_entries'-table doesn't exist" do
+    expect {
+      Book.create
+    }.to raise_error("Could not find table 'combi_search_entries'")
+  end
+end
+
+describe "CombiSearch with setup" do
   before(:all) {
     Book.create_table
     Movie.create_table
@@ -12,10 +27,6 @@ describe "CombiSearch" do
     Movie.drop_table
     CombiSearch.drop_table
   }
-
-  it 'has a version number' do
-    expect(CombiSearch::VERSION).not_to be nil
-  end
 
   it 'calls update_search_entries when creating model' do
     expect_any_instance_of(Movie).to receive(:update_search_entries)
