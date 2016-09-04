@@ -59,6 +59,15 @@ describe "CombiSearch with setup" do
       expect(CombiSearch::Entry.all.count).to be 2
     end
 
+    it 'are updated (not re-inserted) when a combi-searchable model is updated' do
+      # Each model has two combi_searsch_scope's defined
+      movie = Movie.create()
+      expect(CombiSearch::Entry.all.count).to be 2
+      movie.title = "New title"
+      movie.save
+      expect(CombiSearch::Entry.all.count).to be 2
+    end
+
     it 'are deleted when a combi-searchable model is removed' do
       # Each model has two combi_searsch_scope's defined
       movie = Movie.create()

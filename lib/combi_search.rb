@@ -34,12 +34,20 @@ module CombiSearch
   def update_search_entries
     # Retrieve all combi_search_scopes defined for our class
     search_scopes = self.class.combi_search_scopes
-    existing_entries = search_entries.pluck(:id, :scope)
+    existing_entries_hash = {}
+    search_entries.pluck(:id, :scope).each { |result|
+      existing_entries_hash[result[1].to_sym] = result[0]
+    }
     search_scopes.each { |scope, options|
       searchable_text = search_string_for_attrs(options[:on])
-      search_entries.create(:scope=>scope, :content=>searchable_text)
+      # pre existing search_entry
+      id = existing_entries_hash[scope]
+      if !id.nil?
+        search_entries.update(id, :content=>searchable_text)
+      else
+        search_entries.create(:scope=>scope, :content=>searchable_text)
+      end
     }
-    puts existing_entries
   end
 
   module ClassMethods
