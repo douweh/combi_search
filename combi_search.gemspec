@@ -9,13 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Douwe Homans"]
   spec.email         = ["douwe@avocado.nl"]
 
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
-  end
-
-  spec.summary       = "Adds a search index which combines multiple ActiveRecord models"
-  spec.description   = "CombiSearch allows you to combine multiple ActiveRecord models in a search query. You are able to specify which attributes will be searchable per model, and search will returen search 'Entry'-entities which'll include the original ActiveRecord models as a related model."
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Search in multiple models with one combined query."
+  spec.description   = "Use CombiSearch to add a 'global' search to your app. For example; if you have `Book`s and `Movie`s and you want a combined search where you search in all of your titles."
+  spec.homepage      = "https://github.com/douweh/combi_search"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
