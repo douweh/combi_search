@@ -172,19 +172,14 @@ describe CombiSearch do
       Movie.destroy_all
       Book.destroy_all
       CombiSearch::Entry.destroy_all
+      Book.create(:title=>"Harry Potter and the Sorcerer's Stone", :author => "JK Rowling")
+      Book.create(:title=>"Harry Potter and the Chamber of Secrets", :author => "JK Rowling")
+      Book.create(:title=>"Power 10: An Olympian Shares 10 Ways to Improve Your Rowing", :author => "Fred Borchelt")
+      Movie.create(:title=>"Harry Potter and the Sorcerer's Stone", :director=>"Chris Columbus")
+      Movie.create(:title=>"Harry Potter and the Chamber of Secrets", :director=>"Chris Columbus")
     }
 
     it "searches full-text within scope" do
-
-      Book.create(:title=>"Harry Potter and the Sorcerer's Stone", :author => "JK Rowling")
-      Book.create(:title=>"Harry Potter and the Chamber of Secrets", :author => "JK Rowling")
-
-      Book.create(:title=>"Power 10: An Olympian Shares 10 Ways to Improve Your Rowing", :author => "Fred Borchelt")
-
-
-      Movie.create(:title=>"Harry Potter and the Sorcerer's Stone", :director=>"Chris Columbus")
-      Movie.create(:title=>"Harry Potter and the Chamber of Secrets", :director=>"Chris Columbus")
-
       expect(CombiSearch.scoped(:titles).search('potter').all.count).to be(4) # matches all harry potter titles
       expect(CombiSearch.scoped(:titles).search('Pott hArrY').all.count).to be(4) # matches all harry potter titles
       expect(CombiSearch.scoped(:all_text).search('Rowling').all.count).to be(2) # matches all JK Rowling-books
