@@ -1,4 +1,4 @@
-# CombiSearch
+# CombiSearch ![](https://travis-ci.org/douweh/combi_search.svg?branch=master)
 
 Use CombiSearch to add a 'global' search to your app. For example; if you have `Book`s and `Movie`s and you want a combined search where you search in all of your titles.
 
