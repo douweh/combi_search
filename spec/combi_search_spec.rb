@@ -158,10 +158,8 @@ describe CombiSearch do
       expect(search_results.last.searchable.class).to be Book
     end
 
-    xit "throws for an invalid scope" do
-      Movie.create(:title=>"Irrelevant")
-      Movie.create(:title=>"Also irrelevant")
-      expect(CombiSearch.scoped(:nonexistent).all.count).to be 0
+    it "throws for an invalid scope" do
+      expect(CombiSearch.scoped(:nonexistent).all.count).to raise_error("Scope doesn't exist")
     end
 
   end
