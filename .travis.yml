@@ -2,6 +2,6 @@ language: ruby
 cache: bundler
 rvm:
   - 2.2.0
-script: rspec spec
+script: bundle exec rspec spec
 before_install:
   - gem update bundler
